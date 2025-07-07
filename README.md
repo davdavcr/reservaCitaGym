@@ -1,112 +1,111 @@
-# reservaCitaGym
+The user has provided an image containing a detailed README for a gym class reservation system called "reservaCitaGym". I will extract and present the key information from this README in a structured format.
 
-## Descripción
+## reservaCitaGym: Gym Class Reservation System
 
-Este es un proyecto sencillo para la gestión de reservas de clases en un gimnasio, con enfoque principal en la base de datos. El sistema cuenta con tres tipos de usuarios:
+This is a simple project for managing gym class reservations, with a primary focus on the database.
 
-- **Administrador:** Usuario especial con acceso a la ruta `/admin`.  
-  - Usuario: `adminp2024`  
-  - Contraseña: `123456`  
-- **Empleados:** Añaden usuarios y clases (junto con sus cupos).  
-- **Usuarios:** Pueden iniciar sesión, ver las clases disponibles por fecha y reservar su espacio en una clase, siempre y cuando haya cupos disponibles.
+### User Types and Access
 
-> **Nota:** Este proyecto no cuenta con protocolos avanzados de seguridad, pues se enfoca en la base de datos. Se agregarán medidas de seguridad en caso de que se decida vender el programa.
+The system supports three types of users:
 
----
+  * **Administrator**: Special user with access to the `/admin` route.
+      * Username: `adminp2024`
+      * Password: `123456`
+  * **Employees**: Can add users and classes (along with their capacities).
+  * **Users**: Can log in, view available classes by date, and reserve a spot in a class, provided there's availability.
 
-## Instalación y configuración
+**Note:** This project does not include advanced security protocols as its main focus is on the database. Security measures will be added if the program is intended for sale.
 
-### Clonar el repositorio
+### Installation and Configuration
+
+#### 1\. Clone the Repository
 
 ```bash
 git clone https://github.com/davdavcr/reservaCitaGym.git
 cd reservaCitaGym
+```
 
-Crear y activar entorno virtual (Python)
-Este proyecto usa Python, y el entorno virtual está nombrado como venv.
+#### 2\. Create and Activate a Python Virtual Environment
 
-En Windows:
-python -m venv venv
-.\venv\Scripts\activate
+The project uses Python, and the virtual environment is named `venv`.
 
-En Linux/macOS:
-python3 -m venv venv
-source venv/bin/activate
+  * **On Windows:**
+    ```bash
+    python -m venv venv
+    .\venv\Scripts\activate
+    ```
+  * **On Linux/macOS:**
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
 
-Instalar dependencias
-Si existe un archivo requirements.txt, instalar las dependencias con:
+#### 3\. Install Dependencies
+
+If a `requirements.txt` file exists, install dependencies with:
+
+```bash
 pip install -r requirements.txt
+```
 
-Importante: En caso de que el proyecto use Django o un framework web similar, cambiar las extensiones .django a .html o adecuar las rutas en el front-end para que funcionen correctamente.
+**Important:** If the project uses Django or a similar web framework, change `.django` extensions to `.html` or adjust front-end routes accordingly for correct functionality.
 
-Configuración de la base de datos
-Este proyecto está pensado para usar SQL Server. Para que funcione correctamente, en el archivo data_access.py se debe modificar la cadena de conexión con los datos específicos de tu computadora:
+#### 4\. Database Configuration
 
+This project is designed to use **SQL Server**. To ensure correct functionality, you must modify the connection string in the `data_access.py` file with your specific computer's details:
+
+```python
 class DataAccess:
     def __init__(self):
         self.connection_string = (
             'DRIVER={ODBC Driver 17 for SQL Server};'
-            'SERVER=TU_SERVIDOR;'  # Cambiar 'TU_SERVIDOR' por el nombre o IP de tu servidor SQL
+            'SERVER=TU_SERVIDOR;'  # Change 'TU_SERVIDOR' to your SQL server's name or IP
             'DATABASE=proyecto_gym;'
-            'UID=TU_USUARIO;'      # Cambiar 'TU_USUARIO' por tu usuario de SQL Server
-            'PWD=TU_CONTRASEÑA;'   # Cambiar 'TU_CONTRASEÑA' por tu contraseña de SQL Server
+            'UID=TU_USUARIO;'      # Change 'TU_USUARIO' to your SQL Server username
+            'PWD=TU_CONTRASEÑA;'   # Change 'TU_CONTRASEÑA' to your SQL Server password
         )
+```
 
-Estructura del proyecto
-__init__.py: Inicializa el paquete o módulo principal de la aplicación.
+### Project Structure
 
-routes.py: Define las rutas o endpoints de la aplicación, controlando el flujo entre las vistas y la lógica de negocio.
+  * `__init__.py`: Initializes the package or main module of the application.
+  * `routes.py`: Defines the application's routes or endpoints, controlling the flow between views and business logic.
+  * `business.py`: Contains the business logic, processing data and coordinating operations between the database and the interface.
+  * `data_access.py`: Handles functions related to connecting to and querying the SQL Server database, using stored procedures, triggers, and validations.
+  * `entities.py`: Defines the data entities or models in Python that represent the database tables.
+  * `run.py`: The main file to start the application.
+  * `static/`: Folder containing static resources:
+      * `css/`: Style files.
+      * `js/`: JavaScript files.
 
-business.py: Contiene la lógica de negocio, procesando datos y coordinando las operaciones entre la base de datos y la interfaz.
+### Database Details
 
-data_access.py: Maneja las funciones relacionadas con la conexión y consultas a la base de datos SQL Server, usando procedimientos almacenados, triggers y validaciones.
+The system uses an SQL Server database named `proyecto_gym` which contains tables for gyms, users, classes, and class enrollments.
 
-entities.py: Define las entidades o modelos de datos en Python que representan las tablas de la base de datos.
+#### Key Features
 
-run.py: Archivo principal para iniciar la aplicación.
+  * **Stored Procedures**: Used for CRUD (Create, Read, Update, Delete) operations on all entities.
+  * **Triggers**: Implemented for maintaining referential integrity and data validation (e.g., preventing duplicate users, controlling class capacities, cascading deletions of related data).
+  * **Validations**:
+      * Specific format for usernames.
+      * Prevention of duplicates for gyms, users, and IDs.
+      * Control of class capacities and prevention of duplicate enrollments.
 
-static/: Carpeta que contiene los recursos estáticos:
+The complete database script is included in the project documentation or in the `script_bd.sql` file.
 
-css/: Archivos de estilos.
+### Usage
 
-js/: Archivos de JavaScript.
+1.  **Initialize the database**: Execute the SQL script to create the tables, procedures, and triggers.
+2.  **Configure the connection string**: In `data_access.py`.
+3.  **Run the application**:
+    ```bash
+    python run.py
+    ```
+4.  **Access the application**: Open it in your browser.
+5.  **Access the administrative panel**: Use the `/admin` route with the administrator username and password provided above.
 
-Base de datos
-El sistema usa una base de datos SQL Server llamada proyecto_gym que contiene tablas para gimnasios, usuarios, clases y las inscripciones a clases.
+### Authors
 
-Características importantes
-Uso de procedimientos almacenados para operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en todas las entidades.
-
-Implementación de triggers para mantener integridad referencial y validar datos (ejemplo: evitar usuarios duplicados, controlar cupos de clases, eliminar en cascada datos relacionados).
-
-Validaciones como:
-
-Formato específico para los nombres de usuario.
-
-Prevención de duplicados en gimnasios, usuarios y cédulas.
-
-Control de cupos en clases y control de inscripciones duplicadas.
-
-El script completo de la base de datos está incluido en la documentación del proyecto o en el archivo script_bd.sql.
-
-Uso
-Iniciar la base de datos ejecutando el script SQL para crear las tablas, procedimientos y triggers.
-
-Configurar la cadena de conexión en data_access.py.
-
-Ejecutar la aplicación con:
-python run.py
-
-Acceder a la aplicación en el navegador.
-
-Para acceder al panel administrativo, usar la ruta /admin con el usuario y contraseña indicados arriba.
-
-Autores
-David Arturo Brenes Angulo
-
-Andrés Solano Contreras
-
-Andrey Aguilar Aguirre
-
-
-
+  * David Arturo Brenes Angulo
+  * Andrés Solano Contreras
+  * Andrey Aguilar Aguirre
