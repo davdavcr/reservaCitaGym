@@ -1,7 +1,3 @@
-Okay, aquí tienes la información del proyecto "reservaCitaGym" organizada y en español, tal como la pediste:
-
------
-
 ## reservaCitaGym: Sistema de Reservas de Clases de Gimnasio
 
 **Descripción**
