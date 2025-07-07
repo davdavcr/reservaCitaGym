@@ -1,110 +1,114 @@
-The user has provided an image containing a detailed README for a gym class reservation system called "reservaCitaGym". I will extract and present the key information from this README in a structured format.
+Okay, aquí tienes la información del proyecto "reservaCitaGym" organizada y en español, tal como la pediste:
 
-## reservaCitaGym: Gym Class Reservation System
+-----
 
-This is a simple project for managing gym class reservations, with a primary focus on the database.
+## reservaCitaGym: Sistema de Reservas de Clases de Gimnasio
 
-### User Types and Access
+**Descripción**
 
-The system supports three types of users:
+Este es un proyecto sencillo diseñado para la gestión de reservas de clases en un gimnasio, con un enfoque principal en la base de datos.
 
-  * **Administrator**: Special user with access to the `/admin` route.
-      * Username: `adminp2024`
-      * Password: `123456`
-  * **Employees**: Can add users and classes (along with their capacities).
-  * **Users**: Can log in, view available classes by date, and reserve a spot in a class, provided there's availability.
+### Tipos de Usuarios y Acceso
 
-**Note:** This project does not include advanced security protocols as its main focus is on the database. Security measures will be added if the program is intended for sale.
+El sistema cuenta con tres tipos de usuarios:
 
-### Installation and Configuration
+  * **Administrador**: Usuario especial con acceso a la ruta `/admin`.
+      * **Usuario**: `adminp2024`
+      * **Contraseña**: `123456`
+  * **Empleados**: Pueden añadir usuarios y clases (junto con sus cupos).
+  * **Usuarios**: Pueden iniciar sesión, ver las clases disponibles por fecha y reservar su espacio en una clase, siempre y cuando haya cupos disponibles.
 
-#### 1\. Clone the Repository
+**Nota**: Este proyecto no cuenta con protocolos avanzados de seguridad, pues se enfoca en la base de datos. Se agregarán medidas de seguridad en caso de que se decida vender el programa.
+
+### Instalación y Configuración
+
+#### 1\. Clonar el Repositorio
 
 ```bash
 git clone https://github.com/davdavcr/reservaCitaGym.git
 cd reservaCitaGym
 ```
 
-#### 2\. Create and Activate a Python Virtual Environment
+#### 2\. Crear y Activar Entorno Virtual (Python)
 
-The project uses Python, and the virtual environment is named `venv`.
+Este proyecto usa Python, y el entorno virtual está nombrado como `venv`.
 
-  * **On Windows:**
+  * **En Windows**:
     ```bash
     python -m venv venv
     .\venv\Scripts\activate
     ```
-  * **On Linux/macOS:**
+  * **En Linux/macOS**:
     ```bash
     python3 -m venv venv
     source venv/bin/activate
     ```
 
-#### 3\. Install Dependencies
+#### 3\. Instalar Dependencias
 
-If a `requirements.txt` file exists, install dependencies with:
+Si existe un archivo `requirements.txt`, instalar las dependencias con:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**Important:** If the project uses Django or a similar web framework, change `.django` extensions to `.html` or adjust front-end routes accordingly for correct functionality.
+**Importante**: En caso de que el proyecto use Django o un framework web similar, cambiar las extensiones `.django` a `.html` o adecuar las rutas en el front-end para que funcionen correctamente.
 
-#### 4\. Database Configuration
+#### 4\. Configuración de la Base de Datos
 
-This project is designed to use **SQL Server**. To ensure correct functionality, you must modify the connection string in the `data_access.py` file with your specific computer's details:
+Este proyecto está pensado para usar **SQL Server**. Para que funcione correctamente, en el archivo `data_access.py` se debe modificar la cadena de conexión con los datos específicos de tu computadora:
 
 ```python
 class DataAccess:
     def __init__(self):
         self.connection_string = (
             'DRIVER={ODBC Driver 17 for SQL Server};'
-            'SERVER=TU_SERVIDOR;'  # Change 'TU_SERVIDOR' to your SQL server's name or IP
+            'SERVER=TU_SERVIDOR;'  # Cambiar 'TU_SERVIDOR' por el nombre o IP de tu servidor SQL
             'DATABASE=proyecto_gym;'
-            'UID=TU_USUARIO;'      # Change 'TU_USUARIO' to your SQL Server username
-            'PWD=TU_CONTRASEÑA;'   # Change 'TU_CONTRASEÑA' to your SQL Server password
+            'UID=TU_USUARIO;'      # Cambiar 'TU_USUARIO' por tu usuario de SQL Server
+            'PWD=TU_CONTRASEÑA;'   # Cambiar 'TU_CONTRASEÑA' por tu contraseña de SQL Server
         )
 ```
 
-### Project Structure
+### Estructura del Proyecto
 
-  * `__init__.py`: Initializes the package or main module of the application.
-  * `routes.py`: Defines the application's routes or endpoints, controlling the flow between views and business logic.
-  * `business.py`: Contains the business logic, processing data and coordinating operations between the database and the interface.
-  * `data_access.py`: Handles functions related to connecting to and querying the SQL Server database, using stored procedures, triggers, and validations.
-  * `entities.py`: Defines the data entities or models in Python that represent the database tables.
-  * `run.py`: The main file to start the application.
-  * `static/`: Folder containing static resources:
-      * `css/`: Style files.
-      * `js/`: JavaScript files.
+  * `__init__.py`: Inicializa el paquete o módulo principal de la aplicación.
+  * `routes.py`: Define las rutas o *endpoints* de la aplicación, controlando el flujo entre las vistas y la lógica de negocio.
+  * `business.py`: Contiene la lógica de negocio, procesando datos y coordinando las operaciones entre la base de datos y la interfaz.
+  * `data_access.py`: Maneja las funciones relacionadas con la conexión y consultas a la base de datos SQL Server, usando procedimientos almacenados, *triggers* y validaciones.
+  * `entities.py`: Define las entidades o modelos de datos en Python que representan las tablas de la base de datos.
+  * `run.py`: Archivo principal para iniciar la aplicación.
+  * `static/`: Carpeta que contiene los recursos estáticos:
+      * `css/`: Archivos de estilos.
+      * `js/`: Archivos de JavaScript.
 
-### Database Details
+### Base de Datos
 
-The system uses an SQL Server database named `proyecto_gym` which contains tables for gyms, users, classes, and class enrollments.
+El sistema usa una base de datos SQL Server llamada `proyecto_gym` que contiene tablas para gimnasios, usuarios, clases y las inscripciones a clases.
 
-#### Key Features
+#### Características Importantes
 
-  * **Stored Procedures**: Used for CRUD (Create, Read, Update, Delete) operations on all entities.
-  * **Triggers**: Implemented for maintaining referential integrity and data validation (e.g., preventing duplicate users, controlling class capacities, cascading deletions of related data).
-  * **Validations**:
-      * Specific format for usernames.
-      * Prevention of duplicates for gyms, users, and IDs.
-      * Control of class capacities and prevention of duplicate enrollments.
+  * **Uso de procedimientos almacenados**: Para operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en todas las entidades.
+  * **Implementación de *triggers***: Para mantener integridad referencial y validar datos (ejemplo: evitar usuarios duplicados, controlar cupos de clases, eliminar en cascada datos relacionados).
+  * **Validaciones como**:
+      * Formato específico para los nombres de usuario.
+      * Prevención de duplicados en gimnasios, usuarios y cédulas.
+      * Control de cupos en clases y control de inscripciones duplicadas.
 
-The complete database script is included in the project documentation or in the `script_bd.sql` file.
+El script completo de la base de datos está incluido en la documentación del proyecto o en el archivo `script_bd.sql`.
 
-### Usage
+### Uso
 
-1.  **Initialize the database**: Execute the SQL script to create the tables, procedures, and triggers.
-2.  **Configure the connection string**: In `data_access.py`.
-3.  **Run the application**:
+1.  **Iniciar la base de datos**: Ejecutando el script SQL para crear las tablas, procedimientos y *triggers*.
+2.  **Configurar la cadena de conexión**: En `data_access.py`.
+3.  **Ejecutar la aplicación**:
     ```bash
     python run.py
     ```
-4.  **Access the application**: Open it in your browser.
-5.  **Access the administrative panel**: Use the `/admin` route with the administrator username and password provided above.
+4.  **Acceder a la aplicación**: En el navegador.
+5.  **Acceder al panel administrativo**: Usar la ruta `/admin` con el usuario y contraseña indicados arriba.
 
-### Authors
+### Autores
 
   * David Arturo Brenes Angulo
   * Andrés Solano Contreras
