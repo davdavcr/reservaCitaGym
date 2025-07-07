@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Gimnasio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-5">Agregar Nuevo Gimnasio</h2>
+        <form id="addGymForm" action="/admin/add-gym" method="post">
+            <div class="form-group">
+                <label for="name">Nombre del Gimnasio:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-success">Guardar Gimnasio</button>
+        </form>
+
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrativo - Clases</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-dash.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-sidebar.css') }}">
+    <style>
+        .btn {
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-primary { background-color: #007bff; color: white; }
+        .btn-primary:hover { background-color: #0056b3; }
+        .btn-danger { background-color: #dc3545; color: white; }
+        .btn-danger:hover { background-color: #c82333; }
+        .mt-5 { margin-top: 2.5rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .table th, .table td { vertical-align: middle; text-align: center; }
+        .btn-group { display: flex; justify-content: center; gap: 10px; }
+    </style>
+</head>
+<body>
+    <label for="burger" class="burger">
+        <input type="checkbox" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+
+    <div class="sidebar">
+        <h3 class="text-center">Menú</h3>
+        <a href="{{ url_for('routes.admin_gym_dashboard') }}">Usuarios</a>
+        <a href="{{ url_for('routes.admin_gym_dashboard_clases') }}">Clases</a>
+        <a href="{{ url_for('routes.logout') }}">Cerrar Sesión</a>
+    </div>
+
+    <div class="content">
+        <div class="container-content">
+            <div class="container">
+                <h2 class="mt-5">Dashboard de Administración de Clases</h2>
+
+                <!-- Botón para agregar una nueva clase -->
+                <div class="mb-4">
+                    <a href="{{ url_for('routes.admin_gym_add_clase') }}" class="btn btn-primary">Agregar Nueva Clase</a>
+                </div>
+
+                <!-- Tabla de clases -->
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nombre de la Clase</th>
+                            <th>Horario</th>
+                            <th>Capacidad</th>
+                            <th>Participantes Actuales</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for clase in clases %}
+                        <tr>
+                            <td>{{ clase.name }}</td>
+                            <td>{{ clase.schedule.strftime('%d-%m-%Y %H:%M') }}</td>
+                            <td>{{ clase.capacity }}</td>
+                            <td>{{ clase.current_participants }}</td>
+                            <td class="btn-group">
+                                <a href="{{ url_for('routes.admin_gym_edit_clase', clase_id=clase.id) }}" class="btn btn-primary">Editar</a>
+                                <form action="{{ url_for('routes.admin_gym_delete_clase', clase_id=clase.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de querer eliminar esta clase?');">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5">No se encontraron clases.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/toggleSidebar.js') }}"></script>
+</body>
+</html>
+

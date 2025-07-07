@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Clase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_edit.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-5">Agregar Nueva Clase</h2>
+        <form action="{{ url_for('routes.admin_gym_add_clase') }}" method="post">
+            <div class="form-group">
+                <label for="name">Nombre de la Clase:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="schedule">Horario:</label>
+                <input type="datetime-local" class="form-control" id="schedule" name="schedule" required>
+            </div>
+            <div class="form-group">
+                <label for="capacity">Capacidad:</label>
+                <input type="number" class="form-control" id="capacity" name="capacity" required>
+            </div>
+            <button type="submit" class="btn btn-success">Guardar Clase</button>
+            <a href="{{ url_for('routes.admin_gym_dashboard_clases') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
