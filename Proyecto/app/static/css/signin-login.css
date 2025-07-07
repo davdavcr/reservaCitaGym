@@ -1,0 +1,131 @@
+:root {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --container-bg-color: #1f1f1f;
+    --btn-primary-bg: #007bff;
+    --btn-primary-hover-bg: #0056b3;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --border-radius: 10px;
+    --transition-speed: 0.4s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.form-container {
+    background-color: var(--container-bg-color);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+span {
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    border: 1px solid #444;
+    background-color: #333;
+    color: var(--text-color);
+    padding: 10px;
+    width: 100%;
+    margin: 10px 0;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del input */
+}
+
+.password {
+    position: relative;
+}
+
+#password-toggle {
+    display: none;
+}
+
+.eye, .eye-slash {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+    fill: var(--text-color);
+}
+
+.eye-slash {
+    display: none;
+}
+
+#password-toggle:checked ~ .eye {
+    display: none;
+}
+
+#password-toggle:checked ~ .eye-slash {
+    display: block;
+}
+
+button[type="submit"] {
+    background-color: var(--btn-primary-bg);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--btn-primary-hover-bg);
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: var(--container-bg-color);
+    position: fixed;
+    bottom: 0;
+    color: var(--text-color);
+    font-size: 12px;
+}

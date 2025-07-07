@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Fecha</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_edit.css') }}">
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 300px;
+            margin-top: 150px;
+            background: #1f1f1f;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="date"] {
+            width: 478px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Selecciona una Fecha</h2>
+        <form action="{{ url_for('routes.user_select_date') }}" method="POST">
+            <div class="form-group">
+                <label for="date">Elige una fecha para ver las clases disponibles:</label>
+                <input type="date" id="date" name="selected_date" required>
+            </div>
+            <div class="btn-container">
+                <button type="submit" class="btn btn-primary">Buscar Clases</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

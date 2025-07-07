@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+
+        <h2 class="mt-5">Dashboard de Administración de Gimnasios</h2>
+
+        <!-- Botón para agregar un nuevo gimnasio -->
+        <a href="{{ url_for('routes.add_gym') }}" class="btn btn-success mb-3">Agregar Nuevo Gimnasio</a>
+
+        <!-- Tabla de gimnasios -->
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <!-- Eliminamos el encabezado de la columna de ID -->
+                    <th>Nombre</th>
+                    <th>Contraseña</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for gym in gyms %}
+                <tr>
+                    <!-- Eliminamos la columna de ID -->
+                    <td>{{ gym.name }}</td>
+                    <td>{{ gym.password }}</td>
+                    <td>
+                        <!-- Seguimos pasando el ID en los enlaces para editar y eliminar, pero no lo mostramos -->
+                        <a href="{{ url_for('routes.edit_gym', id=gym.id) }}" class="btn btn-primary">Editar</a>
+                        <form action="{{ url_for('routes.delete_gym', id=gym.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de querer eliminar este gimnasio?');">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">No se encontraron gimnasios.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
